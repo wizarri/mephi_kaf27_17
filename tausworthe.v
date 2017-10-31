@@ -6,7 +6,7 @@ module tausworthe
   
   generator_part 
   #(
-  	.SEED(3881941467), .CONST(3837055832), .SHIFT_L1(13), .SHIFT_L2(12), SHIFT_R(19)
+  	.SEED(32'hE761B9DB), .CONST(32'hE4B4D358), .SHIFT_L1(4'hD), .SHIFT_L2(4'hC), .SHIFT_R(8'h13)
   )
   part_1
   (
@@ -17,7 +17,7 @@ module tausworthe
 
   generator_part 
   #(
-  	.SEED(3031748956), .CONST(2226442581), .SHIFT_L1(2), .SHIFT_L2(4), SHIFT_R(25)
+  	.SEED(32'hB4B4D15C), .CONST(32'h84B4D155), .SHIFT_L1(4'h2), .SHIFT_L2(4'h4), .SHIFT_R(8'h19)
   )
   part_2
   (
@@ -28,7 +28,7 @@ module tausworthe
 
   generator_part 
   #(
-  	.SEED(3233078613), .CONST(2259992917), .SHIFT_L1(3), .SHIFT_L2(17), SHIFT_R(11)
+  	.SEED(32'hC0B4DD55), .CONST(32'h86B4C155), .SHIFT_L1(4'h3), .SHIFT_L2(8'h11), .SHIFT_R(4'hB)
   )
   part_3
   (

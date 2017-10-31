@@ -1,10 +1,10 @@
 module generator_part 
 #(
-  parameter SEED     = 4294967295,
-  parameter CONST    = 4294967295,
-  parameter SHIFT_L1 = 4294967295,
-  parameter SHIFT_L2 = 4294967295,
-  parameter SHIFT_R  = 4294967295
+  parameter SEED     = 32'hFFFFFFFF,
+  parameter CONST    = 32'hFFFFFFFF,
+  parameter SHIFT_L1 = 4'hB,
+  parameter SHIFT_L2 = 4'hB,
+  parameter SHIFT_R  = 4'hB
 )
 
 (
