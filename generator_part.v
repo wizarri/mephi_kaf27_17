@@ -19,8 +19,8 @@ module generator_part
     begin
   	  if (rst) begin
   		  reg_s <= SEED;
-		  reg_l <= 32'h0;
-		  reg_r <= 32'h0;
+		  reg_l <= 32'h00000000;
+		  reg_r <= 32'h00000000;
 	  end  
   	  else begin
   		  reg_s <= xor2;
@@ -32,11 +32,11 @@ module generator_part
   assign wire_s   = reg_s;
   assign wire_r   = reg_r;
   assign wire_l   = reg_l; 
-  assign shift_l1 = wire_s <<< SHIFT_L1;
+  assign shift_l1 = wire_s << SHIFT_L1;
   assign bit_and  = wire_s & CONST;
   assign xor1     = shift_l1 ^ wire_s;
-  assign shift_r  = wire_r >>> SHIFT_R;
-  assign shift_l2 = wire_l <<< SHIFT_L2;
+  assign shift_r  = wire_r >> SHIFT_R;
+  assign shift_l2 = wire_l << SHIFT_L2;
   assign xor2     = shift_r ^ shift_l2;
   assign out      = xor2;
   
