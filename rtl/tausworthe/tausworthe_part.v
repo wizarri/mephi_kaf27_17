@@ -1,4 +1,6 @@
-module tausworthe
+`timescale 1ns / 1ps
+
+module tausworthe_part 
 #(
   parameter SEED     = 32'hffffffff,
   parameter SHIFT_L1 = 8'd13,
@@ -7,42 +9,46 @@ module tausworthe
   parameter CONST    = 32'hfffffffe
 )
 (
-  input         clk,
-                rst,
-
-  output [31:0] out
+  input clk, rst,
+  output [31:0] out,
+  output out_valid_s, out_valid_lr
 );
 
-  reg [31:0] s_reg, l_reg, r_reg;
-  wire [31:0] l_path, r_path, x_or;
+  reg [31:0] reg_s, reg_l, reg_r;
+  reg valid_s, valid_lr;
+  wire [31:0] wire_s, wire_l, wire_r;
 
-    always @(posedge clk or posedge rst)
-        if (rst)
-            begin
-            s_reg <= SEED;
-            end
-        else
-            begin 
-              s_reg <= x_or;
-            end 
-  
   always @(posedge clk or posedge rst)
-    if (rst)
-        begin
-            l_reg <= 32'h00000000;
-            r_reg <= 32'h00000000;
-        end
-    else
-        begin 
-            l_reg <= (s_reg << SHIFT_L1) ^ s_reg;
-            r_reg <= s_reg & CONST;
-        end 
+    begin
+	   if (rst) begin 
+		  valid_s <= 1'b1;
+		  valid_lr <= 1'b0;
+		end
+      else begin
+        valid_s  <= valid_lr;
+        valid_lr <= valid_s;
+      end
+    end
 
-  assign l_path = l_reg >> SHIFT_R;
-  assign r_path = r_reg << SHIFT_L2;
-  assign x_or   = l_path ^ r_path;
- 
-  assign out = x_or;
-
-
-endmodule
+  always @(posedge clk or posedge rst)
+    begin
+	   if (rst) begin
+		  reg_s <= SEED;
+		end
+		else if (valid_s == 1'b1) begin
+		  reg_l <= wire_l;
+		  reg_r <= wire_r;
+		end
+		else if (valid_lr == 1'b1) begin
+		  reg_s <= wire_s;
+		end
+    end
+	 
+  assign wire_l = (reg_s << SHIFT_L1) ^ reg_s;
+  assign wire_r = reg_s & CONST;
+  assign wire_s = (reg_l >> SHIFT_R) ^ (reg_r << SHIFT_L2);
+  assign out = wire_s;
+  assign out_valid_s  = valid_s;
+  assign out_valid_lr = valid_lr;
+	 
+endmodule //tausworthe_part
