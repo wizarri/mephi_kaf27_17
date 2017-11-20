@@ -11,7 +11,7 @@ module tausworthe
   wire out_valid_lr1, out_valid_lr2, out_valid_lr3;
   tausworthe_part
   #(
-  	.SEED(32'hE761B9DB), .CONST(32'hE4B4D358), 
+  	.SEED(32'hE761B9DB), .CONST(32'hfffffffe), 
   	.SHIFT_L1(8'd13), .SHIFT_L2(8'd12), .SHIFT_R(8'd19)
   )
   part_1
@@ -25,7 +25,7 @@ module tausworthe
 
   tausworthe_part 
   #(
-  	.SEED(32'hB4B4D15C), .CONST(32'h84B4D155), 
+  	.SEED(32'hB4B4D15C), .CONST(32'hfffffff8), 
   	.SHIFT_L1(4'd2), .SHIFT_L2(4'd4), .SHIFT_R(8'd25)
   )
   part_2
@@ -39,7 +39,7 @@ module tausworthe
 
   tausworthe_part 
   #(
-  	.SEED(32'hC0B4DD55), .CONST(32'h86B4C155), 
+  	.SEED(32'hC0B4DD55), .CONST(32'hfffffff0), 
   	.SHIFT_L1(4'd3), .SHIFT_L2(8'd17), .SHIFT_R(8'd11)
   )
   part_3
