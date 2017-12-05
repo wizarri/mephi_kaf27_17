@@ -1,0 +1,63 @@
+module block2
+(
+	input [9:0]	p_addr,
+	input [9:0] 	q_addr,
+	input [9:0] 	r_addr,
+	input [9:0] 	s_addr,
+	input clk, 
+	input rst, 
+	input we,
+	input [1:0] mx,
+	input m,x,
+	output  c_out
+	
+);
+
+[9:0] mux1,addr_b,addr_a;
+[9:0] counter_out;
+[23:0] data_a, b_out, a_out, a_in, b_in, a, b;
+[23:0] pool_rom_out;
+
+assign mux1 = x ? p_addr : r_addr;
+assign addr_b = x ? q_addr : s_addr;
+assign addr_a = x ? counter_out : mux1 ;
+assign data_a = x ? pool_rom_out : b_out;
+assign data_b = a_out;
+
+
+counter 
+(
+	.clk(clk),
+	.rst(rst),
+	.out(counter_out)
+)
+
+
+pool_rom 
+( .rst(rst),
+	.out(pool_rom_out)
+)
+ 
+
+pool_ram 
+( .clk(clk),
+	.we(we),
+	.addr_a(addr_a),
+	.addr_b(addr_b),
+	.data_a(data_a),
+	.data_b(data_b),
+	.a(a),
+	.b(b)
+	)
+
+ transformation 
+ (.a_in(a),
+ 	.b_in(b),
+ 	.m(m),
+ 	.mx(mx),
+ 	.a_out(a_out),
+ 	.b_out(b_out),
+ 	.c_out(c_out)
+ 	)
+
+endmodule 
