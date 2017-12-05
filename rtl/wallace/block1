@@ -1,0 +1,22 @@
+module block1
+(
+	input  [31:0]	taus,   
+	output [9:0]	p_addr,
+	output [9:0] 	q_addr,
+	output [9:0] 	r_addr,
+	output [9:0] 	s_addr
+);
+
+wire [9:0] 	start;
+wire [9:0] 	stride; 
+wire [9:0] 	mask;
+
+assign start = taus[31:22];
+assign start = {taus[21:13],1'b1};
+assign start = taus[12:3];
+assign p_addr = mask ^ start;
+assign q_addr = mask ^ (start + stride);
+assign r_addr = mask ^ (start + stride*2);
+assign s_addr = mask ^ (start + stride*3);
+
+endmodule 
