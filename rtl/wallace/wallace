@@ -1,0 +1,47 @@
+module wallace
+(
+	input clk,   
+	input rst, 
+	output noise   
+	
+);
+
+tausworthe
+(
+	.rst(rst),
+	.clk(clk),
+	.out(taus)
+)
+
+block1
+(
+	.taus(taus),
+	.p_addr(p_addr),
+	.q_addr(q_addr),
+	.r_addr(r_addr),
+	.s_addr(s_addr)
+)
+
+block2
+(
+	.p_addr(p_addr),
+	.q_addr(q_addr),
+	.r_addr(r_addr),
+	.s_addr(s_addr)
+	.rst(rst),
+	.clk(clk),
+	.we(we),
+	.mx(mx),
+	.m(m),
+	.x(x),
+	.c_out(c_out)
+)
+
+block3
+(
+	.rst(rst),
+	.c_in(c_out),
+	.noicse(noise)
+)
+
+endmodule
