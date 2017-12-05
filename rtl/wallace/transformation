@@ -1,0 +1,49 @@
+module transformation(
+
+	input 	[23:0] a_in,    
+	input  	[23:0] b_in, 
+	input		m,mx,
+	output 	[23:0] a_out,
+	output 	[23:0] b_out,
+	output 	[23:0] c_out 
+	
+	);
+reg [23:0] c,p,q,r,s;
+reg [23:0] res1,res2,mux1,mux2,mux3;
+reg [23:0] mux4,mux5,mux6,mux7,mux8;
+
+
+always@*
+	begin 
+		case (mx)
+			2'b00: c = p;
+			2'b01: c = q;
+			2'b10: c = r;
+			2'b11: c = s;
+		endcase
+	end
+
+assign res1 = a_in + b_in;
+assign res2 = res1*4;
+
+assign mux1 = (m) ? res2 : a_in;
+assign mux2 = (m) ? a_in : res2 ;
+assign p = mux1 - mux2;
+
+assign mux3 = (m) ? b_in : res2;
+assign mux4 = (m) ? res2 : b_in;
+assign q = mux3 - mux4;
+
+assign mux5 = (m) ? a_in : res2;
+assign mux6 = (m) ? res2 : a_in ;
+assign r = mux5 - mux6;
+
+assign mux7 = (m) ? b_in : res2 ;
+assign mux8 = (m) ? res2 : b_in;
+assign s = mux7 - mux8;
+
+assign a_out = (m) ? r : p ;
+assign b_out = (m) ? s : q ;
+assign c_out = c;
+
+endmodule 
