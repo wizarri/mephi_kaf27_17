@@ -1,0 +1,24 @@
+module counter 
+#(parameter N=24)
+(
+	input clk,
+	input rst,
+	output [N-1:0] out
+
+);
+
+reg [N-1:0] q=0;
+wire [N-1:0] qq; 
+
+always @(posedge clk, posedge rst) 
+	begin
+		if (rst)
+			q <= 0;
+		else 
+			q <= qq;
+	end
+
+assign qq = q + 1;
+assign out = q;
+
+endmodule 
