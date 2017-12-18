@@ -1,0 +1,41 @@
+`timescale 1ns / 1ps
+
+module block1_test;
+
+	// Inputs
+	reg [31:0] taus;
+
+	// Outputs
+	wire [9:0] p_addr;
+	wire [9:0] q_addr;
+	wire [9:0] r_addr;
+	wire [9:0] s_addr;
+
+	// Instantiate the Unit Under Test (UUT)
+	block1 uut (
+		.taus(taus), 
+		.p_addr(p_addr), 
+		.q_addr(q_addr), 
+		.r_addr(r_addr), 
+		.s_addr(s_addr)
+	);
+
+	initial begin
+		// Initialize Inputs
+		taus = 0;
+		#10
+		taus = 32'b11111111110000000000000000000111;
+		#10
+		taus = 32'b11111111110000000001100110011000;
+		#10
+		taus = 32'b00000000001010101011111111111111;
+		#10
+		taus = 32'b01010101010001110001000000000000;
+		#10
+		taus = 32'b11111111111111111111111111111111;
+		#10
+		$finish;
+		
+	end
+      
+endmodule
