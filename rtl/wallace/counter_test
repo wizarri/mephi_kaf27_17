@@ -6,7 +6,7 @@ module counter_test;
 	wire [23:0] out;
 
 
-	block uut
+	counter #(.N(24)) uut
 (
 	.clk(clk), 
 	.rst(rst), 
