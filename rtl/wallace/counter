@@ -8,17 +8,17 @@ module counter
 );
 
 reg [N-1:0] q=0;
-wire [N-1:0] qq; 
+wire [N-1:0] q_plus; 
 
 always @(posedge clk, posedge rst) 
 	begin
 		if (rst)
 			q <= 0;
 		else 
-			q <= qq;
+			q <= q_plus;
 	end
 
-assign qq = q + 1;
+assign q_plus = q + 1;
 assign out = q;
 
 endmodule 
