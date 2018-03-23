@@ -10,16 +10,14 @@ module block1
 wire [9:0] 	start;
 wire [9:0] 	stride; 
 wire [9:0] 	mask;
-wire [9:0] 	c;
 
 assign start = taus[31:22];
 assign staide = {taus[21:13],1'b1};
-assign mask = taus[12:3];
+assign mask = taus[9:0];
 
 assign p_addr = mask ^ start;
 assign q_addr = mask ^ (start + stride);
-assign r_addr = mask ^ (start + c);
-assign s_addr = mask ^ (start + c + stride);
-assign c = stride<<1;
+assign r_addr = mask ^ (start + stride<<1);
+assign s_addr = mask ^ (start + stride<<1 + stride);
 
 endmodule 
