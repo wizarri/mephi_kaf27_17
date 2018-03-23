@@ -2,16 +2,13 @@
 
 module block1_test;
 
-	// Inputs
 	reg [31:0] taus;
 
-	// Outputs
 	wire [9:0] p_addr;
 	wire [9:0] q_addr;
 	wire [9:0] r_addr;
 	wire [9:0] s_addr;
 
-	// Instantiate the Unit Under Test (UUT)
 	block1 uut (
 		.taus(taus), 
 		.p_addr(p_addr), 
@@ -21,21 +18,68 @@ module block1_test;
 	);
 
 	initial begin
-		// Initialize Inputs
 		taus = 0;
-		#10
-		taus = 32'b11111111110000000000000000000111;
-		#10
-		taus = 32'b11111111110000000001100110011000;
-		#10
-		taus = 32'b00000000001010101011111111111111;
-		#10
-		taus = 32'b01010101010001110001000000000000;
-		#10
-		taus = 32'b11111111111111111111111111111111;
-		#10
-		$finish;
+		#10;
+      		taus= 1;
+		#10;
+		taus= 2;
+		#10;
+		taus= 3;
+		#10;
+		taus= 4;
+		#10;
+		taus=5;
+		#10;
+		taus= 6;
+		#10;
+		taus= 7;
+		#10;		
+		taus= 8;
+		#10;		
+		taus= 9;
+		#10;		
+		taus= 10;
+		#10;		
+		taus= 11;
+		#10;		
+		taus= 12;
+		#10;
+		taus= 13;
+		#10;
+		taus= 14;
+		#10;
+		taus=15;
+		#10;
+		taus= 16;
+		#10;
+		taus= 17;
+		#10;		
+		taus= 18;
+		#10;		
+		taus= 19;
+		#10;
 		
+       		taus= 2000000;
+		#10;
+		taus= 2000001;
+		#10;
+		taus= 2000002;
+		#10;
+		taus= 2000003;
+		#10;
+		taus= 2000004;
+		#10;
+		taus= 2000005;
+		#10;
+		taus= 2000006;
+		#10;
+		taus= 2000007;
+		#10;		
+		taus= 2000008;
+		#10;		
+		taus= 2000009;
+		#10;
+			
 	end
       
 endmodule
