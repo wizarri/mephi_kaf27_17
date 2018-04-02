@@ -1,0 +1,91 @@
+`timescale 1ns / 1ps
+
+module test;
+
+	reg [31:0] taus;
+	reg clk;
+	reg valid_taus;
+	reg rst;
+
+	wire [9:0] p_addr;
+	wire [9:0] q_addr;
+	wire [9:0] r_addr;
+	wire [9:0] s_addr;
+		
+	bloc1 uut (
+		.taus(taus), 
+		.clk(clk),
+		.rst(rst),
+		.valid_taus(valid_taus),
+		.p_addr(p_addr), 
+		.q_addr(q_addr), 
+		.r_addr(r_addr), 
+		.s_addr(s_addr)
+		
+	);
+
+initial begin 
+	clk=1;
+	forever begin 
+	#10 clk=~clk;
+	end
+end
+	
+initial begin 
+
+	valid_taus=0;
+	rst=0;
+	#20;
+	valid_taus=1;
+	rst=1;
+	#20;	
+	valid_taus=0;
+	rst=0;
+	#80;
+	valid_taus=1;
+	#20;
+	valid_taus=0;
+	#80;
+	valid_taus=1;
+	#20;
+	valid_taus=0;
+	#80;
+	valid_taus=1;
+	#20;
+	valid_taus=0;
+	#80;
+	valid_taus=1;
+	#20;
+	valid_taus=0;
+	#80;
+	valid_taus=1;
+	#20;
+	valid_taus=0;
+	#80;
+	valid_taus=1;
+	#20;
+	valid_taus=0;	
+end
+	
+initial begin
+		taus=400111111;
+		#100;
+		taus = 3999909998;
+		#100;
+		taus = 1545400087;
+		#100
+		taus=1978011;
+		#100;
+		taus = 4000548;
+		#100;
+		taus=0;
+		#100;
+		taus = 3979491;
+		#100;
+		taus=3645000;
+		#10;
+		taus = 1002003048;
+		#100;
+		taus=3331100017;
+end
+endmodule
