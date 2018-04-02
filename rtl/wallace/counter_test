@@ -1,36 +1,33 @@
-module counter_test;
+module test_counter;
 
 	reg clk;
 	reg rst;
 
-	wire [23:0] out;
+	wire [5:0] q_out;
+	wire valid_counter;
 
-
-	counter #(.N(24)) uut
-(
-	.clk(clk), 
-	.rst(rst), 
-	.out(out)
-);
-	
-	initial begin
-		clk = 0;
-			forever begin
-			#10
-			clk = ~clk;
-			end
- 	end 
+	counter uut (
+		.clk(clk), 
+		.rst(rst), 
+		.q_out(q_out), 
+		.valid_counter(valid_counter)
+	);
 
 	initial begin
+		// Initialize Inputs
+		clk = 1;
+		forever begin #10 clk=~clk;
+		end
+		end
+		
+	initial begin
+		
 		rst = 0;
-		#10
-		rst = 1;
-		#10
-		rst = 0;
-		#100
-		rst = 1;
-		#20
-		rst = 0;
-	end
+		#100;
+		rst =1;
+		#20;
+		rst =0;
+		#300;
+  		end
       
 endmodule
