@@ -1,0 +1,26 @@
+module pool_rom
+#(parameter N=24,M=10 )
+(
+	input clk,
+	input rst,
+	input counter,
+
+	output reg [N-1:0] data_out
+);
+
+reg [N-1:0] rom [0:2**M-1];
+
+
+initial
+begin 
+	$readmemb("rom.txt",rom);
+end
+
+always @(posedge clk or negedge rst) begin 
+	if(rst) begin
+		 data_out<= rom[addres];
+	end else 
+	data_out<=0;
+	end
+
+endmodule 
