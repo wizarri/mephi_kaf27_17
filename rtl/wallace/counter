@@ -1,24 +1,26 @@
-module counter 
-#(parameter N=24)
+module counter
+#(parameter N=10)
 (
 	input clk,
 	input rst,
-	output [N-1:0] out
-
+	output [N:0] q_out,
+	output valid_counter
 );
 
-reg [N-1:0] q=0;
-wire [N-1:0] q_plus; 
+reg [N:0] q ;
+wire [N:0] q_plus;
+//reg valid_q;
 
 always @(posedge clk, posedge rst) 
-	begin
+	begin 
 		if (rst)
 			q <= 0;
 		else 
-			q <= q_plus;
+			q<=q_plus;
 	end
-
-assign q_plus = q + 1;
-assign out = q;
+	
+assign valid_counter = (q<N) ? 1 :0;
+assign q_plus = q+1;
+assign q_out=  (valid_counter==1)? q : 0;
 
 endmodule 
