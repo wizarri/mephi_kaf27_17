@@ -1,0 +1,60 @@
+module block_pqrs(
+	input  [31:0]	taus,   
+	input valid_taus,
+	input clk,
+	input rst,
+
+	output [9:0]	p_addr,
+	output [9:0] 	q_addr,
+	output [9:0] 	r_addr,
+	output [9:0] 	s_addr
+	
+);
+
+
+wire [9:0] 	start;
+wire [9:0] 	stride; 
+wire [9:0] 	mask;
+wire [9:0] p_wire,q_wire,s_wire ,r_wire;
+reg [9:0] p_reg;
+reg [9:0] q_reg,s_reg ,r_reg;
+
+assign start = taus[31:22];
+assign stride = {taus[21:13],1'b1};
+assign mask = taus[9:0];
+
+
+
+assign p_wire = mask ^ start;
+assign q_wire = mask ^ (start + stride);
+assign r_wire = mask ^ (start + stride<<1);
+assign s_wire = mask ^ (start + stride<<1 + stride);
+
+
+always  @(posedge clk,posedge rst) 
+	begin 
+		if((valid_taus==1) &&(!rst))
+			begin
+				p_reg <= p_wire;
+				q_reg <= q_wire;
+				r_reg <= r_wire;
+				s_reg <= s_wire;
+				
+			end 
+			else 
+			if(rst) begin
+				p_reg<=0;
+				q_reg<=0;
+				r_reg<=0;
+				s_reg<=0;
+			end
+	end
+	
+assign p_addr = p_reg;
+assign q_addr = q_reg;
+assign s_addr = s_reg;
+assign r_addr = r_reg;
+
+
+endmodule 
+
